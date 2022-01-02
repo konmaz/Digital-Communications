@@ -1,13 +1,18 @@
 import javax.naming.AuthenticationException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 
-public class RemoteCommunicator implements CommunicatorInterFace{
-    private static LinkedHashMap<String,Account> accountsLinkedHashMap;
-    private static LinkedHashMap<Integer, Account> authIDMap;
-    public RemoteCommunicator() {
+public class RemoteCommunicator extends UnicastRemoteObject implements CommunicatorInterFace {
+    private final LinkedHashMap<String, Account> accountsLinkedHashMap;
+    private final LinkedHashMap<Integer, Account> authIDMap;
+
+    public RemoteCommunicator() throws RemoteException {
+        super();
         accountsLinkedHashMap = new LinkedHashMap<>(); // init
+        authIDMap = new LinkedHashMap<>(); // init
     }
 
     /**
@@ -21,7 +26,7 @@ public class RemoteCommunicator implements CommunicatorInterFace{
     @Override
     public int createAccount(String username) throws RemoteException, IllegalArgumentException {
         if (accountsLinkedHashMap.containsKey(username))
-            throw new IllegalArgumentException("Username already exists");
+            throw new IllegalArgumentException("Sorry, the user already exists");
 
         // TODO check if username does not contain illegal characters.
 
@@ -41,12 +46,12 @@ public class RemoteCommunicator implements CommunicatorInterFace{
      */
     @Override
     public String[] getAllUsernames(int authKey) throws RemoteException, AuthenticationException {
-        checkAuthKey(authKey);
+        getAccountFromAUTHID(authKey);
         String[] usernamesStrings = new String[accountsLinkedHashMap.size()];
         int i = 0;
         for (Account item : accountsLinkedHashMap.values()) {
             usernamesStrings[i] = item.getUsername();
-            i+=1;
+            i += 1;
         }
         return usernamesStrings;
     }
@@ -63,9 +68,8 @@ public class RemoteCommunicator implements CommunicatorInterFace{
      */
     @Override
     public void sendMessage(int authKey, String recipient, String messageBody) throws RemoteException, AuthenticationException, IllegalArgumentException {
-        checkAuthKey(authKey);
+        Account senderAccountObj = getAccountFromAUTHID(authKey);
         Account recipientAccountObj = accountsLinkedHashMap.get(recipient);
-        Account senderAccountObj = authIDMap.get(authKey);
         if (recipient == null)
             throw new AuthenticationException("Recipient username don't exist");
 
@@ -82,9 +86,7 @@ public class RemoteCommunicator implements CommunicatorInterFace{
      */
     @Override
     public ArrayList<Message> getAllUserMessages(int authKey) throws RemoteException, AuthenticationException {
-        checkAuthKey(authKey);
-
-        return null;
+        return getAccountFromAUTHID(authKey).getMessageBox();
     }
 
     /**
@@ -98,9 +100,7 @@ public class RemoteCommunicator implements CommunicatorInterFace{
      */
     @Override
     public Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException {
-        checkAuthKey(authKey);
-
-        return null;
+        return getAccountFromAUTHID(authKey).getMessageBox().get(posOfMessage);
     }
 
     /**
@@ -108,23 +108,24 @@ public class RemoteCommunicator implements CommunicatorInterFace{
      *
      * @param authKey      The AUTH KEY.
      * @param posOfMessage The position of the message in the field of the Account Messages.
-     * @return A list of username strings.
      * @throws RemoteException         If there is a problem with the connection.
      * @throws AuthenticationException If there is a problem with the authKey.
      */
     @Override
     public void deleteMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException {
-        checkAuthKey(authKey);
-
+        getAccountFromAUTHID(authKey).getMessageBox().remove(posOfMessage);
     }
 
     /**
      * Check if the authKey is valid.
+     *
      * @param authKey The AUTH KEY.
+     * @return the correspondence Account-AUth ID.
      * @throws AuthenticationException Throws exception when the auth key don't belong to an account.
      */
-    private void checkAuthKey(int authKey) throws AuthenticationException{
+    private Account getAccountFromAUTHID(int authKey) throws AuthenticationException {
         if (!authIDMap.containsKey(authKey))
             throw new AuthenticationException("Invalid Auth Key");
+        return authIDMap.get(authKey);
     }
 }

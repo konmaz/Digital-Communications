@@ -63,7 +63,6 @@ public interface CommunicatorInterFace extends Remote {
      * A client request to delete a message from the authKey user inbox .
      * @param authKey The AUTH KEY.
      * @param posOfMessage The position of the message in the field of the Account Messages.
-     * @return A list of username strings.
      * @throws RemoteException If there is a problem with the connection.
      * @throws AuthenticationException If there is a problem with the authKey.
      * @throws IllegalArgumentException If the posOfMessage points to a message that don't exist

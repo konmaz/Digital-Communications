@@ -56,8 +56,9 @@ public interface CommunicatorInterFace extends Remote {
      * @return the message with ID.
      * @throws RemoteException If there is a problem with the connection.
      * @throws AuthenticationException If there is a problem with the authKey.
+     * @throws IllegalArgumentException If the posOfMessage points to a message that don't exist
      */
-    Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException;
+    Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException, IllegalArgumentException;
 
     /**
      * A client request to delete a message from the authKey user inbox .

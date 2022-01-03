@@ -97,10 +97,15 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
      * @return the message with ID.
      * @throws RemoteException         If there is a problem with the connection.
      * @throws AuthenticationException If there is a problem with the authKey.
+     * @throws IllegalArgumentException If the posOfMessage points to a message that don't exist
      */
     @Override
-    public Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException {
-        return getAccountFromAUTHID(authKey).getMessageBox().get(posOfMessage);
+    public Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException, IllegalArgumentException {
+        try{
+            return getAccountFromAUTHID(authKey).getMessageBox().get(posOfMessage);
+        }catch (IndexOutOfBoundsException e){
+            throw new IllegalArgumentException("Message ID does not exist");
+        }
     }
 
     /**
@@ -113,7 +118,11 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
      */
     @Override
     public void deleteMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException {
-        getAccountFromAUTHID(authKey).getMessageBox().remove(posOfMessage);
+        try {
+            getAccountFromAUTHID(authKey).getMessageBox().remove(posOfMessage);
+        }catch (IndexOutOfBoundsException e){
+            throw new IllegalArgumentException("Message ID does not exist");
+        }
     }
 
     /**

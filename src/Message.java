@@ -10,4 +10,12 @@ public class Message {
         this.receiver = receiver;
         this.body = body;
     }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setAsRead(){
+        isRead = true;
+    }
 }

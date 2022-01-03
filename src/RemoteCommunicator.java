@@ -71,7 +71,7 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
         Account senderAccountObj = getAccountFromAUTHID(authKey);
         Account recipientAccountObj = accountsLinkedHashMap.get(recipient);
         if (recipient == null)
-            throw new AuthenticationException("Recipient username don't exist");
+            throw new AuthenticationException("User does not exist");
 
         recipientAccountObj.addMessage(new Message(senderAccountObj.getUsername(), recipientAccountObj.getUsername(), messageBody));
     }
@@ -125,7 +125,7 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
      */
     private Account getAccountFromAUTHID(int authKey) throws AuthenticationException {
         if (!authIDMap.containsKey(authKey))
-            throw new AuthenticationException("Invalid Auth Key");
+            throw new AuthenticationException("Invalid Auth Token");
         return authIDMap.get(authKey);
     }
 }

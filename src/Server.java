@@ -20,7 +20,4 @@ public class Server {
             e.printStackTrace();
         }
     }
-    public void forTesting(String[] args){
-        main(args);
-    }
 }

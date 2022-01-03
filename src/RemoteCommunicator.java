@@ -102,9 +102,11 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
     @Override
     public Message readMessage(int authKey, int posOfMessage) throws RemoteException, AuthenticationException, IllegalArgumentException {
         try{
-            return getAccountFromAUTHID(authKey).getMessageBox().get(posOfMessage);
+            Message message = getAccountFromAUTHID(authKey).getMessageBox().get(posOfMessage);
+            message.setAsRead();
+            return message;
         }catch (IndexOutOfBoundsException e){
-            throw new IllegalArgumentException("Message ID does not exist");
+            throw new IllegalArgumentException("Message does not exist");
         }
     }
 
@@ -121,7 +123,7 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
         try {
             getAccountFromAUTHID(authKey).getMessageBox().remove(posOfMessage);
         }catch (IndexOutOfBoundsException e){
-            throw new IllegalArgumentException("Message ID does not exist");
+            throw new IllegalArgumentException("Message does not exist");
         }
     }
 

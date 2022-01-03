@@ -20,6 +20,7 @@ public class Account {
         this.username = username;
         authToken = Account.counter;
         Account.counter+=1;
+        this.messageBox = new ArrayList<>();
     }
 
     public int getAuthToken() {
@@ -40,8 +41,8 @@ public class Account {
 
     /**
      * Checks if a username contains illegal characters
-     * @param username
-     * @return
+     * @param username The username to be checked
+     * @return True if the username is valid false if the username contains illegal characters of its length is zero.
      */
     public static boolean isUsernameValid(String username){
         Pattern p = Pattern.compile("^[A-Za-z0-9_]*$");

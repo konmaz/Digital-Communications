@@ -1,8 +1,10 @@
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     private boolean isRead;
-    String sender;
-    String receiver;
-    String body;
+    private final String sender;
+    private final String receiver;
+    private final String body;
 
     public Message(String sender, String receiver, String body) {
         this.isRead = false;
@@ -16,6 +18,18 @@ public class Message {
     }
 
     public void setAsRead(){
-        isRead = true;
+        this.isRead = true;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public String getBody() {
+        return body;
     }
 }

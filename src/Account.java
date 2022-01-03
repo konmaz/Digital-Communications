@@ -42,7 +42,7 @@ public class Account {
     /**
      * Checks if a username contains illegal characters
      * @param username The username to be checked
-     * @return True if the username is valid false if the username contains illegal characters of its length is zero.
+     * @return True if the username is valid false if the username contains illegal characters; or its length is zero.
      */
     public static boolean isUsernameValid(String username){
         Pattern p = Pattern.compile("^[A-Za-z0-9_]*$");

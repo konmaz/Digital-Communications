@@ -14,7 +14,8 @@ public class ServerTest {
         Server.main(new String[]{"5000"});
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+
+    @Test(expected = IllegalArgumentException.class)
     public void testServerStartWithoutArguments() {
         Server.main(new String[]{});
     }

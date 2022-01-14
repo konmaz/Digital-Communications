@@ -13,7 +13,7 @@ public class Client {
             String IP = args[0];
             int port = Integer.parseInt(args[1]);
             Registry rmiRegistry = LocateRegistry.getRegistry(IP,port);
-            CommunicatorInterFace stub = (CommunicatorInterFace) rmiRegistry.lookup("remCom");
+            CommunicatorInterface stub = (CommunicatorInterface) rmiRegistry.lookup("remCom");
 
             String FN_ID = args[2];
             try{

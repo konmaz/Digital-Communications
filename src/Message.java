@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Message implements Serializable {
+public class Message implements Serializable { // Serializable to be able to sent it over RMI
     private boolean isRead;
     private final String sender;
     private final String receiver;

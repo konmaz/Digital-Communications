@@ -12,7 +12,8 @@ public class Account {
     private final int authToken;
     ArrayList<Message> messageBox;
 
-    private static int counter = 100;
+    private static int counter = 100; // For generating auth ID's.
+    // In a production deployment the ID should be generated RANDOMLY to prevent a user from guessing another user AUTH KEY
 
     public Account(String username) throws IllegalArgumentException{
         if (!isUsernameValid(username))

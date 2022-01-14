@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * A Class to show which method should be implemented.
  */
-public interface CommunicatorInterFace extends Remote {
+public interface CommunicatorInterface extends Remote {
 
     /**
      * A client requests an auth key, the client registers himself to the server.

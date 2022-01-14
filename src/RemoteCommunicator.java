@@ -2,10 +2,9 @@ import javax.naming.AuthenticationException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 
-public class RemoteCommunicator extends UnicastRemoteObject implements CommunicatorInterFace {
+public class RemoteCommunicator extends UnicastRemoteObject implements CommunicatorInterface {
     private final LinkedHashMap<String, Account> accountsLinkedHashMap;
     private final LinkedHashMap<Integer, Account> authIDMap;
 

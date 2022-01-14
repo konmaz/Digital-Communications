@@ -6,6 +6,9 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * This class represents a client, a client request from a server. Also parses the command line arguments.
+ */
 public class Client {
     public static void main(String[] args) {
 

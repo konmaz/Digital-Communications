@@ -2,6 +2,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ * This class represents a server, the server replies to request made by clients, it uses Java's RMI Protocol. Also parses the command line arguments.
+ */
 public class Server {
 
     public static void main(String[] args) {

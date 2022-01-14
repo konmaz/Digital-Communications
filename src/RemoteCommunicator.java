@@ -4,6 +4,9 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+/**
+ * This class implements the interface CommunicatorInterface, this class is responsible for the logic side of the server, it handles requests and has also a list of all Accounts.
+ */
 public class RemoteCommunicator extends UnicastRemoteObject implements CommunicatorInterface {
     private final LinkedHashMap<String, Account> accountsLinkedHashMap;
     private final LinkedHashMap<Integer, Account> authIDMap;
@@ -26,8 +29,6 @@ public class RemoteCommunicator extends UnicastRemoteObject implements Communica
     public int createAccount(String username) throws RemoteException, IllegalArgumentException {
         if (accountsLinkedHashMap.containsKey(username))
             throw new IllegalArgumentException("Sorry, the user already exists");
-
-        // TODO check if username does not contain illegal characters.
 
         Account newAccount = new Account(username);
         accountsLinkedHashMap.put(newAccount.getUsername(), newAccount);

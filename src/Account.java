@@ -1,10 +1,8 @@
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * A class that represents an account
+ * A class that represents an account.
  */
 public class Account {
     private final String username;

@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
- * A Class to show which method should be implemented.
+ * This interface class dictates which requests are available for the Client.
  */
 public interface CommunicatorInterface extends Remote {
 

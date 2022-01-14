@@ -1,16 +1,16 @@
 This repository contains Java code for a simple Request Reply Messaging App. It isn't persistent (it doesn't save the messages to a file/database).
 #Classes
 ##Server
-This class implements a server, the server replies to request made by clients, it uses Java's RMI Protocol. Also parses the command line arguments.
+This class represents a server, the server replies to request made by clients, it uses Java's RMI Protocol. Also parses the command line arguments.
 
 ##Client
-This class implements a client, a client request from a server. Also parses the command line arguments.
+This class represents a client, a client request from a server. Also parses the command line arguments.
 
 ##Message
-This class implements a message, every message is private and can be seen only by the recipient.
+This class represents a message, every message is private and can be seen only by the recipient.
 
 ##Account
-This class implements an account, every account has a unique username and a private auth token.
+This class represents an account, every account has a unique username and a private auth token.
 
 **NOTE**: *In a proper implementation every auth token should be generated RANDOMLY to prevent a malicious user from guessing the auth token from another user.* 
 

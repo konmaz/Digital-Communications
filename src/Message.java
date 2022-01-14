@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * This class implements a message, every message is private and can be seen only by the recipient.
+ */
 public class Message implements Serializable { // Serializable to be able to sent it over RMI
     private boolean isRead;
     private final String sender;
